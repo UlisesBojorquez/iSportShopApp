@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "415348053685",
+    "project_id": "isportshop-8959b",
+    "storage_bucket": "isportshop-8959b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415348053685:android:6d854c39ca16b963ec90fc",
+        "android_client_info": {
+          "package_name": "com.example.isportshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "415348053685-j8v5nokcmlvun4hs26oktr2a6jmojppk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7qef_vmHlo9HuKD3M5qAzjMTmMFuyPd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "415348053685-j8v5nokcmlvun4hs26oktr2a6jmojppk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
