@@ -104,5 +104,21 @@ class ProductActivity : AppCompatActivity() {
                     }
             }
         }
+
+        if((stock.text.toString().split(" ")[1].toInt()-1) > 0){
+            stock.setText("Stock: " + (stock.text.toString().split(" ")[1].toInt()-1).toString())
+
+            val db = Firebase.firestore
+            db.collection("items").document(intent.getStringExtra("id").toString())
+                .update("stock", stock.text.toString().split(" ")[1].toInt())
+                .addOnSuccessListener { document ->
+                    Log.d("STOCK", "Update went well")
+                }
+                .addOnFailureListener { e ->
+                    Log.wtf("STOCK", "Error on read the document", e)
+                }
+        }
+
+
     }
 }

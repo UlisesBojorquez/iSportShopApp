@@ -97,6 +97,7 @@ class Cart : Fragment() {
                 for (document in documents) {
 
                     if(!listProduct.contains(Product(
+                            document.id,
                             document["name"].toString(),
                             document["description"].toString(),
                             document["price"].toString().toDouble(),
@@ -110,6 +111,7 @@ class Cart : Fragment() {
                             if (nameDocument.equals(item.key)) {  /*Si no funciona, cambiar aqui*/
                                 listProduct.add(
                                     Product(
+                                        document.id,
                                         document["name"].toString(),
                                         document["description"].toString(),
                                         document["price"].toString().toDouble(),

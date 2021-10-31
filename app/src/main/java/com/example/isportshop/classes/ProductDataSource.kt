@@ -17,6 +17,7 @@ class ProductDataSource{
                         Log.d(TAG, "${document.id} => ${document.data}")
                         list.add(
                             Product(
+                                document.id,
                                 document["name"].toString(),
                                 document["description"].toString(),
                                 document["price"].toString().toDouble(),
