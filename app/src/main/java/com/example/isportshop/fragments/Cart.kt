@@ -16,8 +16,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 
-
-
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -86,7 +84,7 @@ class Cart : Fragment() {
 
 
         recyclerView=view.findViewById(R.id.recycler_view_cart)
-        gridLayoutManager = GridLayoutManager(context, 2)
+        gridLayoutManager = GridLayoutManager(context, 1)
         recyclerView.layoutManager = gridLayoutManager
         var listProduct = arrayListOf<ProductCart>()
         val db = Firebase.firestore
@@ -127,7 +125,6 @@ class Cart : Fragment() {
                         }
                     }
                 }
-
                 recyclerView.adapter = ProductsAdapterCart(listProduct)
                 Log.d(ContentValues.TAG, "Successful GET of products on names")
             }

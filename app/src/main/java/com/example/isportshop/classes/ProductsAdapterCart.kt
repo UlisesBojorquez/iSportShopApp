@@ -13,7 +13,6 @@ import com.squareup.picasso.Picasso
 
 class ProductsAdapterCart(private val products : ArrayList<ProductCart>) : RecyclerView.Adapter<ProductsAdapterCart.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_card_cart, parent,false)
         val holder = ViewHolder(view)
@@ -26,7 +25,6 @@ class ProductsAdapterCart(private val products : ArrayList<ProductCart>) : Recyc
             intent.putExtra("stock",products[holder.adapterPosition].stock.toString())
             parent.context.startActivity(intent)
         }
-
         return holder
     }
 
@@ -35,7 +33,6 @@ class ProductsAdapterCart(private val products : ArrayList<ProductCart>) : Recyc
         holder.productName.text = product.name
         Picasso.get().load(product.image).into(holder.productImage)
         holder.productPrice.text = product.price.toString()
-
     }
 
     //How many products are on this list of products
@@ -47,7 +44,5 @@ class ProductsAdapterCart(private val products : ArrayList<ProductCart>) : Recyc
         val productImage : ImageView = itemView.findViewById(R.id.product_image_cart)
         val productName : TextView = itemView.findViewById(R.id.product_name_cart)
         val productPrice : TextView = itemView.findViewById(R.id.product_price_cart)
-
-
     }
 }

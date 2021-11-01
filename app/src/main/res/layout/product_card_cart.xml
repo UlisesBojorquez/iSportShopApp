@@ -15,10 +15,9 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/product_name_cart"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.014" />
+        app:layout_constraintVertical_bias="0.031" />
 
     <ImageView
         android:id="@+id/product_image_cart"
@@ -34,19 +33,17 @@
     <TextView
         android:id="@+id/product_name_cart"
         android:layout_width="198dp"
-        android:layout_height="101dp"
-        android:layout_marginStart="144dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
         android:paddingTop="12dp"
         android:text="Product name"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/product_image_cart"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.237" />
+        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintStart_toEndOf="@+id/product_image_cart"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/product_price_cart"
