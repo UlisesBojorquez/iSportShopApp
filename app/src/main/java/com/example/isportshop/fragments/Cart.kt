@@ -117,7 +117,11 @@ class Cart : Fragment() {
                         var nameDocument = document["name"].toString()
                         for (item in this.itemsList) {
                             //Log.d("entroooooooooo", item)
+<<<<<<< Updated upstream
                             if (nameDocument.equals(item.key)) {  //Si no funciona, cambiar aqui/
+=======
+                            if (nameDocument.equals(item.key)) {  /Si no funciona, cambiar aqui/
+>>>>>>> Stashed changes
                                 listProduct.add(
                                     ProductCart(
                                         document["name"].toString(),
