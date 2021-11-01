@@ -118,7 +118,6 @@ class Cart : Fragment() {
                         for (item in this.itemsList) {
                             //Log.d("entroooooooooo", item)
                             if (nameDocument.equals(item.key)) {  //Si no funciona, cambiar aqui/
-
                                 listProduct.add(
                                     ProductCart(
                                         document["name"].toString(),
