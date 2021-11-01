@@ -44,9 +44,9 @@ class ProductsAdapterCart(private val products : ArrayList<ProductCart>) : Recyc
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val productImage : ImageView = itemView.findViewById(R.id.product_image)
-        val productName : TextView = itemView.findViewById(R.id.product_name)
-        val productPrice : TextView = itemView.findViewById(R.id.product_price)
+        val productImage : ImageView = itemView.findViewById(R.id.product_image_cart)
+        val productName : TextView = itemView.findViewById(R.id.product_name_cart)
+        val productPrice : TextView = itemView.findViewById(R.id.product_price_cart)
 
 
     }

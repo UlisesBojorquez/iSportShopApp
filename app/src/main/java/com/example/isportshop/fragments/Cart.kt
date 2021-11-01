@@ -7,17 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.isportshop.R
-import com.example.isportshop.classes.Product
 import com.example.isportshop.classes.ProductCart
-import com.example.isportshop.classes.ProductsAdapter
 import com.example.isportshop.classes.ProductsAdapterCart
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.firestore.DocumentSnapshot
 
 
 
@@ -126,7 +122,7 @@ class Cart : Fragment() {
                                         document["image"].toString(),
                                         document["stock"].toString().toInt()
                                     )
-                                );
+                                )
                             }
                         }
                     }
