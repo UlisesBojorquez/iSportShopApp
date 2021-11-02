@@ -75,34 +75,7 @@ class Menu : Fragment() {
         progressBar=view.findViewById(R.id.progressBar)
         gridLayoutManager = GridLayoutManager(context, 2)
         recyclerView.layoutManager = gridLayoutManager
-        var listProduct = arrayListOf<Product>()
-        val db = Firebase.firestore
-        db.collection("items")
-            .get()
-            .addOnSuccessListener { documents ->
-                val list= arrayListOf<Product>()
-                //listProduct.clear()
-                for (document in documents) {
-                    list.add(
-                        Product(
-                            document.id,
-                            document["name"].toString(),
-                            document["description"].toString(),
-                            document["price"].toString().toDouble(),
-                            document["image"].toString(),
-                            document["stock"].toString().toInt()
-                        )
-                    )
-                }
-
-                listProduct = list.clone() as ArrayList<Product>
-                recyclerView.adapter = ProductsAdapter(listProduct)
-                Log.d(ContentValues.TAG, "Successful GET of products")
-                progressBar.visibility = View.GONE
-            }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-            }
+        chargeItems()
     }
 
     fun searchMethod(){
@@ -232,6 +205,44 @@ class Menu : Fragment() {
         }
 
 
+    }
+
+    override fun onResume() {
+        chargeItems()
+        super.onResume()
+    }
+
+    private fun chargeItems(){
+        gridLayoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = gridLayoutManager
+        var listProduct = arrayListOf<Product>()
+        val db = Firebase.firestore
+        db.collection("items")
+            .get()
+            .addOnSuccessListener { documents ->
+                val list= arrayListOf<Product>()
+                //listProduct.clear()
+                for (document in documents) {
+                    list.add(
+                        Product(
+                            document.id,
+                            document["name"].toString(),
+                            document["description"].toString(),
+                            document["price"].toString().toDouble(),
+                            document["image"].toString(),
+                            document["stock"].toString().toInt()
+                        )
+                    )
+                }
+
+                listProduct = list.clone() as ArrayList<Product>
+                recyclerView.adapter = ProductsAdapter(listProduct)
+                Log.d(ContentValues.TAG, "Successful GET of products")
+                progressBar.visibility = View.GONE
+            }
+            .addOnFailureListener { exception ->
+                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+            }
     }
 
     companion object {
