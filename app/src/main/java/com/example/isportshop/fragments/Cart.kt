@@ -141,7 +141,7 @@ class Cart : Fragment() {
                 Log.d(ContentValues.TAG, "Successful GET of products on names")
             }
     }
-    
+
 
 
     companion object {
