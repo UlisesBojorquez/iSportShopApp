@@ -70,6 +70,12 @@ class MenuActivity : AppCompatActivity() {
     fun searchMethod(view: View?){
         menuFragment.searchMethod()
     }
+/*
+    public fun shopNow(view: View?){
+        cartFragment.toShopNow(view)
+    }
+    */
+
     /*
         fun displayCartItemsMethod(view: View?){
             cartFragment.displayCartItemsMethod()

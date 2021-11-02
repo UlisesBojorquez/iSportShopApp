@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ISportShop">
         <activity
-            android:name=".ProductCart"
+            android:name=".PaymentDataActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ProductCartActivity"
             android:exported="true" />
         <activity
             android:name=".ProductActivity"

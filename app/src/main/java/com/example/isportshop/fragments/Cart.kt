@@ -1,6 +1,7 @@
 package com.example.isportshop.fragments
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.isportshop.PaymentDataActivity
 import com.example.isportshop.R
 import com.example.isportshop.classes.ProductCart
 import com.example.isportshop.classes.ProductsAdapterCart
@@ -130,6 +132,32 @@ class Cart : Fragment() {
             }
     }
 
+/*
+    override fun toShopNow(view : View?){
+        val intent = Intent(context, PaymentDataActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun toShopNow(parent: ViewGroup, viewType: Int): GameViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.game_row, parent, false)
+        val dvh = GameViewHolder(view)
+
+        dvh.button.setOnClickListener{
+            val intent = Intent(parent.context, GameDetailActivity::class.java)
+            intent.putExtra("nombre",games.getJSONObject(dvh.adapterPosition).getString("nombre"))
+            intent.putExtra("plataformas",games.getJSONObject(dvh.adapterPosition).getString("plataformas"))
+            intent.putExtra("anio",games.getJSONObject(dvh.adapterPosition).getString("anio"))
+            intent.putExtra("imagen",games.getJSONObject(dvh.adapterPosition).getString("imagen"))
+
+            parent.context.startActivity(intent)
+        }
+
+        view.setOnClickListener(listener)
+        return dvh
+    }
+
+ */
+
 
     companion object {
         /**
@@ -150,4 +178,6 @@ class Cart : Fragment() {
                 }
             }
     }
+
+
 }

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.isportshop.ProductActivity
+import com.example.isportshop.ProductCartActivity
 import com.example.isportshop.R
 import com.squareup.picasso.Picasso
 
@@ -17,7 +17,7 @@ class ProductsAdapterCart(private val products : ArrayList<ProductCart>) : Recyc
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_card_cart, parent,false)
         val holder = ViewHolder(view)
         view.setOnClickListener{
-            val intent = Intent(parent.context, ProductActivity::class.java)
+            val intent = Intent(parent.context, ProductCartActivity::class.java)
             intent.putExtra("name",products[holder.adapterPosition].name)
             intent.putExtra("image",products[holder.adapterPosition].image)
             intent.putExtra("description",products[holder.adapterPosition].description)
