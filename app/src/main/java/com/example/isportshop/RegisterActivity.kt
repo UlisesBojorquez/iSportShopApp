@@ -64,6 +64,16 @@ class RegisterActivity : AppCompatActivity() {
                 confirmPassword.setText("");
             }else{
                 var cartItemsMap = mutableMapOf<String, Number>()
+                var location = mutableMapOf<String, String>()
+                location["altitude"]= ""
+                location["longitude"]=""
+                location["country"]=""
+                location["state"]=""
+                location["city"]=""
+                location["postalcode"]=""
+                location["address1"]=""
+                location["address2"]=""
+
                 auth.createUserWithEmailAndPassword(email.text.toString(),password.text.toString())
                     .addOnCompleteListener(this) {
                         if(it.isSuccessful){
@@ -75,7 +85,8 @@ class RegisterActivity : AppCompatActivity() {
                                 "email" to email.text.toString(),
                                 "password" to password.text.toString(),
                                 "balance" to initialBalance,
-                                "cartItems" to cartItemsMap
+                                "cartItems" to cartItemsMap,
+                                "location" to location
                             )
                             val db = Firebase.firestore
                             db.collection("users").document(email.text.toString())

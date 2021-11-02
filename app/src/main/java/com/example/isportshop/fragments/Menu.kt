@@ -85,6 +85,7 @@ class Menu : Fragment() {
                 for (document in documents) {
                     list.add(
                         Product(
+                            document.id,
                             document["name"].toString(),
                             document["description"].toString(),
                             document["price"].toString().toDouble(),
@@ -119,6 +120,7 @@ class Menu : Fragment() {
                     for (document in documents) {
                         list.add(
                             Product(
+                                document.id,
                                 document["name"].toString(),
                                 document["description"].toString(),
                                 document["price"].toString().toDouble(),
@@ -145,6 +147,7 @@ class Menu : Fragment() {
                         if(document["name"].toString().lowercase().equals(term)) {
                             listProduct.add(
                                 Product(
+                                    document.id,
                                     document["name"].toString(),
                                     document["description"].toString(),
                                     document["price"].toString().toDouble(),
@@ -165,6 +168,7 @@ class Menu : Fragment() {
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         if(!listProduct.contains(Product(
+                                document.id,
                                 document["name"].toString(),
                                 document["description"].toString(),
                                 document["price"].toString().toDouble(),
@@ -177,6 +181,7 @@ class Menu : Fragment() {
                                 if (nameDocument.indexOf(word) != -1) {
                                     listProduct.add(
                                         Product(
+                                            document.id,
                                             document["name"].toString(),
                                             document["description"].toString(),
                                             document["price"].toString().toDouble(),
@@ -198,6 +203,7 @@ class Menu : Fragment() {
             Firebase.firestore.collection("items").whereArrayContainsAny("category", terms).get().addOnSuccessListener { documents ->
                 for (document in documents) {
                     if(!listProduct.contains(Product(
+                            document.id,
                             document["name"].toString(),
                             document["description"].toString(),
                             document["price"].toString().toDouble(),
@@ -207,6 +213,7 @@ class Menu : Fragment() {
                     ) {
                     listProduct.add(
                         Product(
+                            document.id,
                             document["name"].toString(),
                             document["description"].toString(),
                             document["price"].toString().toDouble(),
