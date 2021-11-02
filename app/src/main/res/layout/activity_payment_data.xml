@@ -10,33 +10,33 @@
         android:id="@+id/edPayNumCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="39dp"
         android:ems="10"
-        android:hint="Número de tarjeta"
+        android:hint="Card number"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="@+id/tvPayTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvPayTitle" />
-
-    <TextView
-        android:id="@+id/tvPayTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="77dp"
-        android:text="Ingresa los datos de tu tarjeta"
-        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPayTitle" />
+
+    <Button
+        android:id="@+id/btnPay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:onClick="toPay"
+        android:text="Pay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edPayCvvCard" />
 
     <EditText
         android:id="@+id/etPayDateCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
-        android:hint="Fecha de expiración"
+        android:hint="Expiration date"
         android:inputType="date"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="@+id/edPayNumCard"
@@ -46,7 +46,7 @@
         android:id="@+id/edPayCvvCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="26dp"
         android:ems="10"
         android:hint="CVV"
         android:inputType="numberPassword"
@@ -54,15 +54,15 @@
         app:layout_constraintStart_toStartOf="@+id/etPayDateCard"
         app:layout_constraintTop_toBottomOf="@+id/etPayDateCard" />
 
-    <Button
-        android:id="@+id/btnPay"
+    <TextView
+        android:id="@+id/tvPayTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="39dp"
-        android:onClick="toPay"
-        android:text="Pagar"
-        app:layout_constraintStart_toStartOf="@+id/edPayCvvCard"
-        app:layout_constraintTop_toBottomOf="@+id/edPayCvvCard" />
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="78dp"
+        android:text="Enter your card data"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/edPayNumCard"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

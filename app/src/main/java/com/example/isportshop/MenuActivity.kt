@@ -74,7 +74,7 @@ class MenuActivity : AppCompatActivity() {
     public fun shopNow(view: View?){
         cartFragment.toShopNow(view)
     }
-    */
+   */
 
     /*
         fun displayCartItemsMethod(view: View?){

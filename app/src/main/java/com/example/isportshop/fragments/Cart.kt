@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.isportshop.PaymentDataActivity
@@ -33,6 +35,8 @@ class Cart : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    //lateinit var paymentDataFragment: PaymentData
+    lateinit var btnToShop : Button
 
     lateinit var recyclerView : RecyclerView
     private lateinit var gridLayoutManager: GridLayoutManager
@@ -57,6 +61,12 @@ class Cart : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
+        btnToShop = view.findViewById(R.id.btnToShop)
+
+        btnToShop.setOnClickListener {
+            val intent = Intent(context, PaymentDataActivity::class.java)
+            startActivity(intent)
+        }
 
         arguments?.let {
 
@@ -131,44 +141,12 @@ class Cart : Fragment() {
                 Log.d(ContentValues.TAG, "Successful GET of products on names")
             }
     }
-
-/*
-    override fun toShopNow(view : View?){
-        val intent = Intent(context, PaymentDataActivity::class.java)
-        startActivity(intent)
-    }
-
-    override fun toShopNow(parent: ViewGroup, viewType: Int): GameViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.game_row, parent, false)
-        val dvh = GameViewHolder(view)
-
-        dvh.button.setOnClickListener{
-            val intent = Intent(parent.context, GameDetailActivity::class.java)
-            intent.putExtra("nombre",games.getJSONObject(dvh.adapterPosition).getString("nombre"))
-            intent.putExtra("plataformas",games.getJSONObject(dvh.adapterPosition).getString("plataformas"))
-            intent.putExtra("anio",games.getJSONObject(dvh.adapterPosition).getString("anio"))
-            intent.putExtra("imagen",games.getJSONObject(dvh.adapterPosition).getString("imagen"))
-
-            parent.context.startActivity(intent)
-        }
-
-        view.setOnClickListener(listener)
-        return dvh
-    }
-
- */
+    
 
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Cart.
-         */
-        // TODO: Rename and change types and number of parameters
+        //private const val TAG_FRAGMENTO = "fragmentito"
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             Cart().apply {
