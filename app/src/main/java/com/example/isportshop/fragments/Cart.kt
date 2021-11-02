@@ -1,23 +1,23 @@
 package com.example.isportshop.fragments
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
+import android.widget.Button
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.isportshop.PaymentDataActivity
 import com.example.isportshop.R
-import com.example.isportshop.classes.Product
-import com.example.isportshop.classes.ProductsAdapter
+import com.example.isportshop.classes.ProductCart
+import com.example.isportshop.classes.ProductsAdapterCart
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.firestore.DocumentSnapshot
-
-
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,6 +35,8 @@ class Cart : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    //lateinit var paymentDataFragment: PaymentData
+    lateinit var btnToShop : Button
 
     lateinit var recyclerView : RecyclerView
     private lateinit var gridLayoutManager: GridLayoutManager
@@ -59,6 +61,12 @@ class Cart : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
+        btnToShop = view.findViewById(R.id.btnToShop)
+
+        btnToShop.setOnClickListener {
+            val intent = Intent(context, PaymentDataActivity::class.java)
+            startActivity(intent)
+        }
 
         arguments?.let {
 
@@ -68,36 +76,43 @@ class Cart : Fragment() {
                 var doc=it.getString("userCart").toString()
                 val db = Firebase.firestore
                 db.collection("users").document(doc)
-                    .get()
-                    .addOnSuccessListener { document ->
+                    .addSnapshotListener{ document, e ->
+
+                        if(e != null){
+                            Log.e("FIRESTORE", "error: $e")
+                            Log.w("FIREBASE", "Error on read the document from firestore", e)
+                            return@addSnapshotListener
+                        }
+
                         var data = document?.data
                         Log.d("PROFILE", "${data.toString()}")
 
-                        this.itemsList = document["cartItems"] as MutableMap<String, Number>
+                        this.itemsList = document?.get("cartItems") as MutableMap<String, Number>
 
                         //name.text = document["name"].toString()
-                    }
-                    .addOnFailureListener { e ->
-                        Log.w("FIREBASE", "Error on read the document", e)
                     }
             }
         }
 
 
         recyclerView=view.findViewById(R.id.recycler_view_cart)
-        gridLayoutManager = GridLayoutManager(context, 2)
+        gridLayoutManager = GridLayoutManager(context, 1)
         recyclerView.layoutManager = gridLayoutManager
-        var listProduct = arrayListOf<Product>()
+        var listProduct = arrayListOf<ProductCart>()
         val db = Firebase.firestore
 
         //Obtener items de la bd
 
-        Firebase.firestore.collection("items").get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
+        Firebase.firestore.collection("items")
+            .addSnapshotListener{ documents, e ->
 
-                    if(!listProduct.contains(Product(
-                            document.id,
+                if(e != null){
+                    Log.w(ContentValues.TAG, "Error getting documents from Firestrore: ", e)
+                    return@addSnapshotListener
+                }
+
+                for (document in documents!!.iterator()) {
+                    if(!listProduct.contains(ProductCart(
                             document["name"].toString(),
                             document["description"].toString(),
                             document["price"].toString().toDouble(),
@@ -108,39 +123,30 @@ class Cart : Fragment() {
                         var nameDocument = document["name"].toString()
                         for (item in this.itemsList) {
                             //Log.d("entroooooooooo", item)
-                            if (nameDocument.equals(item.key)) {  /*Si no funciona, cambiar aqui*/
+                            if (nameDocument.equals(item.key)) {  //Si no funciona, cambiar aqui/
                                 listProduct.add(
-                                    Product(
-                                        document.id,
+                                    ProductCart(
                                         document["name"].toString(),
                                         document["description"].toString(),
                                         document["price"].toString().toDouble(),
                                         document["image"].toString(),
                                         document["stock"].toString().toInt()
                                     )
-                                );
+                                )
                             }
                         }
                     }
                 }
-                recyclerView.adapter = ProductsAdapter(listProduct)
+                recyclerView.adapter = ProductsAdapterCart(listProduct)
                 Log.d(ContentValues.TAG, "Successful GET of products on names")
-            }.addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
             }
     }
 
 
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Cart.
-         */
-        // TODO: Rename and change types and number of parameters
+        //private const val TAG_FRAGMENTO = "fragmentito"
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             Cart().apply {
@@ -150,4 +156,6 @@ class Cart : Fragment() {
                 }
             }
     }
+
+
 }

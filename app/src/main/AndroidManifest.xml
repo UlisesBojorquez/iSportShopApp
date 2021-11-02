@@ -36,6 +36,12 @@
             android:exported="true"
             android:label="@string/title_activity_maps" />
         <activity
+            android:name=".PaymentDataActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ProductCartActivity"
+            android:exported="true" />
+        <activity
             android:name=".ProductActivity"
             android:exported="true" />
         <activity
