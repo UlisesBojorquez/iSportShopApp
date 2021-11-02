@@ -25,14 +25,12 @@ class ProductCartActivity : AppCompatActivity() {
         image=findViewById(R.id.productCart_image_detail)
         description=findViewById(R.id.productCart_description_detail)
         price=findViewById(R.id.productCart_price_detail)
-        stock=findViewById(R.id.productCart_stock_detail)
 
 
         nameP.setText(intent.getStringExtra("name"))
         Picasso.get().load(intent.getStringExtra("image")).into(image)
         description.setText(intent.getStringExtra("description"))
         price.setText("Price: $" + intent.getStringExtra("price"))
-        stock.setText("Stock: " + intent.getStringExtra("stock"))
 
         productName = intent.getStringExtra("name").toString()
 
