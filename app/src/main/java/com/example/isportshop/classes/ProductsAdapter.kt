@@ -38,7 +38,7 @@ class ProductsAdapter(private val products : ArrayList<Product>) : RecyclerView.
         holder.btnAddToCart.setOnClickListener{
 
             AlertDialog.Builder(view.context)
-                .setMessage("Added to your wish list")
+                .setMessage("Added to your cart")
                 .setPositiveButton("OK") { p0, p1 ->
                 }
                 .create()
