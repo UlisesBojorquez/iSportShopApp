@@ -88,18 +88,24 @@ class Profile : Fragment() {
                     .addOnSuccessListener { document ->
                         var data = document?.data
                         //Log.d("PROFILE", "${data.toString()}")
-                        name.text = document["name"].toString()
-                        lastname.text = document["lastname"].toString()
-                        email.text = document["email"].toString()
-                        password.text = document["password"].toString()
-                        balance.text = document["balance"].toString()
-                        val map: Map<String, String> = document["location"] as Map<String, String>
-                        altitude.text = map["address1"]
-                        longitude.text = map["address2"]
-                        country.text = map["country"]
-                        state.text = map["state"]
-                        city.text = map["city"]
-                        postalcode.text = map["postalcode"]
+
+                            name.text = document["name"].toString()
+                            lastname.text = document["lastname"].toString()
+                            email.text = document["email"].toString()
+                            password.text = document["password"].toString()
+                            balance.text = document["balance"].toString()
+                            if(document["location"]!= null){
+                                val map: Map<String, String> = document["location"] as Map<String, String>
+                                altitude.text = map["address1"]
+                                longitude.text = map["address2"]
+                                country.text = map["country"]
+                                state.text = map["state"]
+                                city.text = map["city"]
+                                postalcode.text = map["postalcode"]
+                            }
+
+
+
 
                     }
                     .addOnFailureListener { e ->
@@ -190,13 +196,15 @@ class Profile : Fragment() {
                 email.text = document["email"].toString()
                 password.text = document["password"].toString()
                 balance.text = document["balance"].toString()
-                val map: Map<String, String> = document["location"] as Map<String, String>
-                altitude.text = map["address1"]
-                longitude.text = map["address2"]
-                country.text = map["country"]
-                state.text = map["state"]
-                city.text = map["city"]
-                postalcode.text = map["postalcode"]
+                if(document["location"]!= null) {
+                    val map: Map<String, String> = document["location"] as Map<String, String>
+                    altitude.text = map["address1"]
+                    longitude.text = map["address2"]
+                    country.text = map["country"]
+                    state.text = map["state"]
+                    city.text = map["city"]
+                    postalcode.text = map["postalcode"]
+                }
 
             }
             .addOnFailureListener { e ->
