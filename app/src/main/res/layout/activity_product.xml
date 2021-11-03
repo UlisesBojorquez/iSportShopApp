@@ -15,7 +15,7 @@
         android:layout_marginBottom="4dp"
         android:backgroundTint="#E11212"
         android:onClick="addToCart"
-        android:text="ADD TO WISH LIST"
+        android:text="ADD TO CART"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.517"
