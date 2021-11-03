@@ -11,4 +11,9 @@ class SuccessfulPaymentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_successful_payment)
     }
+
+    public fun continueShopping(view : View?){
+        val intent = Intent(this, MenuActivity::class.java)
+        startActivity(intent)
+    }
 }
