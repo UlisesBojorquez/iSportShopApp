@@ -76,6 +76,8 @@ class Menu : Fragment() {
         gridLayoutManager = GridLayoutManager(context, 2)
         recyclerView.layoutManager = gridLayoutManager
         chargeItems()
+
+
     }
 
     fun searchMethod(){

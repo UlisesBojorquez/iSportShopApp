@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +38,8 @@ class Cart : Fragment() {
     private var param2: String? = null
     //lateinit var paymentDataFragment: PaymentData
     lateinit var btnToShop : Button
+    lateinit var tvTotalAmount : TextView
+
 
     lateinit var recyclerView : RecyclerView
     private lateinit var gridLayoutManager: GridLayoutManager
@@ -62,6 +65,7 @@ class Cart : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
         btnToShop = view.findViewById(R.id.btnToShop)
+        tvTotalAmount = view.findViewById(R.id.tvTotalAmount)
 
         btnToShop.setOnClickListener {
             val intent = Intent(context, PaymentDataActivity::class.java)
@@ -100,6 +104,7 @@ class Cart : Fragment() {
         recyclerView.layoutManager = gridLayoutManager
         var listProduct = arrayListOf<ProductCart>()
         val db = Firebase.firestore
+        var total = 0.0;
 
         //Obtener items de la bd
 
@@ -133,10 +138,12 @@ class Cart : Fragment() {
                                         document["stock"].toString().toInt()
                                     )
                                 )
+                                total += document["price"].toString().toDouble()
                             }
                         }
                     }
                 }
+                tvTotalAmount.setText(total.toString())
                 recyclerView.adapter = ProductsAdapterCart(listProduct)
                 Log.d(ContentValues.TAG, "Successful GET of products on names")
             }
