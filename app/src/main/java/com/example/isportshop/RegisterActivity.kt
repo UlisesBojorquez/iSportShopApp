@@ -52,7 +52,6 @@ class RegisterActivity : AppCompatActivity() {
         if(TextUtils.isEmpty(lastName.text.toString())){
             flag = false
         }
-
         return flag
     }
 
@@ -110,12 +109,9 @@ class RegisterActivity : AppCompatActivity() {
             Log.w("INPUTS","Inputs missing in register.")
             Toast.makeText(this,"Fill the blank inputs",Toast.LENGTH_SHORT).show()
         }
-
     }
 
     public fun MoveLogIn(v: View?){
         finish()
     }
-
-
 }

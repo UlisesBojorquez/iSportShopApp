@@ -103,10 +103,6 @@ class Profile : Fragment() {
                                 city.text = map["city"]
                                 postalcode.text = map["postalcode"]
                             }
-
-
-
-
                     }
                     .addOnFailureListener { e ->
                         Log.w("FIREBASE", "Error on read the document", e)
@@ -161,7 +157,6 @@ class Profile : Fragment() {
                 .addOnFailureListener { e ->
                     Log.wtf("Profile address error", "Error on read the document", e)
                 }
-
         }
 
         btnDelete.setOnClickListener {
@@ -180,7 +175,6 @@ class Profile : Fragment() {
             maps.isEnabled = true
 
             updateDirection()
-
         }
     }
 
@@ -205,7 +199,6 @@ class Profile : Fragment() {
                     city.text = map["city"]
                     postalcode.text = map["postalcode"]
                 }
-
             }
             .addOnFailureListener { e ->
                 Log.w("FIREBASE", "Error on read the document", e)
@@ -215,9 +208,5 @@ class Profile : Fragment() {
     override fun onResume() {
         updateDirection()
         super.onResume()
-
     }
-
-
-
 }

@@ -49,8 +49,32 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        val latLong = LatLng(currentLocation?.latitude!!, currentLocation?.longitude!!)
-        drawMarker(latLong)
+        //val latLong = LatLng(currentLocation?.latitude!!, currentLocation?.longitude!!)
+        //drawMarker(latLong)
+
+
+        var doc=intent.getStringExtra("currentUser").toString()
+        val db = Firebase.firestore
+        db.collection("users").document(doc)
+            .get()
+            .addOnSuccessListener { document ->
+                var data = document?.data
+                //Log.d("PROFILE", "${data.toString()}")
+
+                if(document["location"]!= null){
+                    val map: Map<String, String> = document["location"] as Map<String, String>
+                    if (map["altitude"] == "" && map["longitude"] == ""){
+                        val latLong = LatLng(currentLocation?.latitude!!, currentLocation?.longitude!!)
+                        drawMarker(latLong)
+                    }else{
+                        val latLong = LatLng(map["altitude"]?.toDouble()!!, map["longitude"]?.toDouble()!!)
+                        drawMarker(latLong)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE", "Error on read the document", e)
+            }
 
         mMap.setOnMarkerDragListener(object : GoogleMap.OnMarkerDragListener{
             override fun onMarkerDrag(p0: Marker) {

@@ -35,6 +35,7 @@ class MenuActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.ic_profile -> {
                     val userData= intent.getStringExtra("userInfo")
+                    Log.wtf("USERINFO", userData)
                     var bundle=Bundle()
                     bundle.putString("userProfile",userData)
                     profileFragment.arguments = bundle
