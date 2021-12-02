@@ -46,7 +46,6 @@
         android:id="@+id/btnAddToCart"
         android:layout_width="382dp"
         android:layout_height="51dp"
-        android:onClick="addToCart"
         android:paddingTop="12dp"
         android:text="Add to cart"
         android:textAlignment="center"

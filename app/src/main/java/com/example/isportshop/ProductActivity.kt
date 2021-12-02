@@ -31,7 +31,6 @@ class ProductActivity : AppCompatActivity() {
     var productName = ""
     var itemsList = arrayListOf<String>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,17 +42,22 @@ class ProductActivity : AppCompatActivity() {
         price=findViewById(R.id.product_price_detail)
         stock=findViewById(R.id.product_stock_detail)
 
-
-        nameP.setText(intent.getStringExtra("name"))
-        Picasso.get().load(intent.getStringExtra("image")).into(image)
-        description.setText(intent.getStringExtra("description"))
-        price.setText("Price: $" + intent.getStringExtra("price"))
-        stock.setText("Stock: " + intent.getStringExtra("stock"))
-
-        productName = intent.getStringExtra("name").toString()
-
+        val db = Firebase.firestore
+        db.collection("items").document(intent.getStringExtra("id").toString())
+            .get()
+            .addOnSuccessListener { document ->
+                var data = document?.data
+                nameP.setText(document["name"].toString())
+                Picasso.get().load(document["image"].toString()).into(image)
+                description.setText(document["description"].toString())
+                price.setText("Price: $" + document["price"].toString())
+                stock.setText("Stock: " + document["stock"].toString())
+                productName = document["name"].toString()
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE", "Error on read the document", e)
+            }
     }
-
 
     public fun addToCart(v: View?){
         AlertDialog.Builder(this)
@@ -118,7 +122,5 @@ class ProductActivity : AppCompatActivity() {
                     Log.wtf("STOCK", "Error on read the document", e)
                 }
         }
-
-
     }
 }

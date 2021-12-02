@@ -23,7 +23,9 @@ class ProductsAdapter(private val products : ArrayList<Product>) : RecyclerView.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_card, parent,false)
         val holder = ViewHolder(view)
+
         holder.productImage.setOnClickListener{
+
             val intent = Intent(parent.context, ProductActivity::class.java)
             intent.putExtra("id",products[holder.adapterPosition].id)
             intent.putExtra("name",products[holder.adapterPosition].name)
@@ -82,15 +84,21 @@ class ProductsAdapter(private val products : ArrayList<Product>) : RecyclerView.
                                 .update("cartItems", listProduct)
                                 .addOnSuccessListener { Log.d("Res", "DocumentSnapshot successfully updated!") }
                                 .addOnFailureListener { e -> Log.w("Res", "Error updating document", e) }
+
+                            Firebase.firestore.collection("items").document(products[holder.adapterPosition].id)
+                                .update("stock", products[holder.adapterPosition].stock-1)
+                                .addOnSuccessListener { document ->
+                                    Log.d("STOCK", "Update went well")
+                                }
+                                .addOnFailureListener { e ->
+                                    Log.wtf("STOCK", "Error on read the document", e)
+                                }
                         }
                 }
             }
-
         }
-
         return holder
     }
-
 
     override fun onBindViewHolder(holder: ProductsAdapter.ViewHolder, position: Int) {
         val product = products[position]
@@ -110,7 +118,5 @@ class ProductsAdapter(private val products : ArrayList<Product>) : RecyclerView.
         val productImage : ImageView = itemView.findViewById(R.id.product_image)
         val productName : TextView = itemView.findViewById(R.id.product_name)
         val productPrice : TextView = itemView.findViewById(R.id.product_price)
-
-
     }
 }
