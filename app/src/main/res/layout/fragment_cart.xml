@@ -41,5 +41,26 @@
         app:layout_constraintTop_toBottomOf="@+id/recycler_view_cart"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/tvTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Total:"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvTotalAmount"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTotalAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnToShop"
+        app:layout_constraintHorizontal_bias="0.082"
+        app:layout_constraintStart_toEndOf="@+id/tvTotal" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
