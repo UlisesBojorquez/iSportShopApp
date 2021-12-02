@@ -282,42 +282,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-    <ImageButton
+    <Button
         android:id="@+id/btnSaveLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:src="@drawable/ic_baseline_bookmark_added"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:text="Guardar"
+        android:textSize="10sp"
+        app:icon="@drawable/ic_baseline_bookmark_added"
+        app:layout_constraintEnd_toStartOf="@+id/btnDeleteLocation"
+        app:layout_constraintStart_toEndOf="@+id/btnAddLocation"
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
-    <ImageButton
+    <Button
         android:id="@+id/btnAddLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:src="@drawable/ic_baseline_bookmark_add"
-        app:layout_constraintBottom_toBottomOf="@+id/btnSaveLocation"
-        app:layout_constraintEnd_toStartOf="@+id/btnSaveLocation"
-        app:layout_constraintHorizontal_bias="0.813"
+        android:layout_width="120dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="1dp"
+        android:text="Editar"
+        android:textSize="10sp"
+        app:icon="@drawable/ic_baseline_bookmark_add"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
-    <ImageButton
+    <Button
         android:id="@+id/btnDeleteLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:minHeight="48dp"
-        android:src="@drawable/ic_baseline_bookmark_remove"
-        app:layout_constraintBottom_toBottomOf="@+id/btnSaveLocation"
+        android:text="Cancelar"
+        android:textSize="10sp"
+        app:icon="@drawable/ic_baseline_bookmark_remove"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.247"
-        app:layout_constraintStart_toEndOf="@+id/btnSaveLocation"
-        app:layout_constraintTop_toBottomOf="@+id/textView24"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,9 +29,9 @@ class Profile : Fragment() {
     lateinit var balance : TextView
     lateinit var maps : Button
 
-    lateinit var btnAdd : ImageButton
-    lateinit var btnSave : ImageButton
-    lateinit var btnDelete : ImageButton
+    lateinit var btnAdd : Button
+    lateinit var btnSave : Button
+    lateinit var btnDelete : Button
     lateinit var altitude : TextView
     lateinit var longitude : TextView
     lateinit var country :TextView
@@ -103,10 +103,6 @@ class Profile : Fragment() {
                                 city.text = map["city"]
                                 postalcode.text = map["postalcode"]
                             }
-
-
-
-
                     }
                     .addOnFailureListener { e ->
                         Log.w("FIREBASE", "Error on read the document", e)
@@ -161,7 +157,6 @@ class Profile : Fragment() {
                 .addOnFailureListener { e ->
                     Log.wtf("Profile address error", "Error on read the document", e)
                 }
-
         }
 
         btnDelete.setOnClickListener {
@@ -180,7 +175,6 @@ class Profile : Fragment() {
             maps.isEnabled = true
 
             updateDirection()
-
         }
     }
 
@@ -205,7 +199,6 @@ class Profile : Fragment() {
                     city.text = map["city"]
                     postalcode.text = map["postalcode"]
                 }
-
             }
             .addOnFailureListener { e ->
                 Log.w("FIREBASE", "Error on read the document", e)
@@ -215,9 +208,5 @@ class Profile : Fragment() {
     override fun onResume() {
         updateDirection()
         super.onResume()
-
     }
-
-
-
 }
