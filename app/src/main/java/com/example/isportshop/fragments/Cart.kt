@@ -10,13 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.isportshop.PaymentDataActivity
 import com.example.isportshop.R
-import com.example.isportshop.ShopHistoryActivity
 import com.example.isportshop.classes.ProductCart
 import com.example.isportshop.classes.ProductsAdapterCart
 import com.google.firebase.firestore.ktx.firestore
@@ -35,6 +33,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class Cart : Fragment() {
     var itemsList = mutableMapOf<String, Number>()
+    private var userEmail: String? = null
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -83,6 +82,10 @@ class Cart : Fragment() {
             val transaction : FragmentTransaction = requireFragmentManager().beginTransaction()
             transaction.replace(R.id.fragment_container, shopFragment)
             transaction.commit()
+
+            var bundle=Bundle()
+            bundle.putString("userCart",userEmail)
+            shopFragment.arguments = bundle
         }
 
         arguments?.let {
@@ -91,6 +94,7 @@ class Cart : Fragment() {
                 Log.d("fragment",it.getString("userCart").toString())
                 //Obtain info from the database
                 var doc=it.getString("userCart").toString()
+                userEmail = it.getString("userCart").toString()
                 val db = Firebase.firestore
                 db.collection("users").document(doc)
                     .addSnapshotListener{ document, e ->
@@ -105,8 +109,6 @@ class Cart : Fragment() {
                         Log.d("PROFILE", "${data.toString()}")
 
                         this.itemsList = document?.get("cartItems") as MutableMap<String, Number>
-
-                        //name.text = document["name"].toString()
                     }
             }
         }
@@ -140,7 +142,7 @@ class Cart : Fragment() {
                     ) {
                         var nameDocument = document["name"].toString()
                         for (item in this.itemsList) {
-                            //Log.d("entroooooooooo", item)
+                            Log.d("entroooooooooo", "-")
                             if (nameDocument.equals(item.key)) {  //Si no funciona, cambiar aqui/
                                 listProduct.add(
                                     ProductCart(

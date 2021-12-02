@@ -17,6 +17,7 @@ class ShopHistoryAdapter(private val products : ArrayList<Shop>) : RecyclerView.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.shop_card, parent,false)
         val holder = ViewHolder(view)
+        /*
         view.setOnClickListener{
             val intent = Intent(parent.context, ProductShopHistoryActivity::class.java)
             intent.putExtra("date",products[holder.adapterPosition].date)
@@ -24,6 +25,7 @@ class ShopHistoryAdapter(private val products : ArrayList<Shop>) : RecyclerView.
             intent.putExtra("totalAmount",products[holder.adapterPosition].totalAmount)
             parent.context.startActivity(intent)
         }
+         */
         return holder
     }
 
