@@ -11,10 +11,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.isportshop.PaymentDataActivity
 import com.example.isportshop.R
+import com.example.isportshop.ShopHistoryActivity
 import com.example.isportshop.classes.ProductCart
 import com.example.isportshop.classes.ProductsAdapterCart
 import com.google.firebase.firestore.ktx.firestore
@@ -38,6 +40,7 @@ class Cart : Fragment() {
     private var param2: String? = null
     //lateinit var paymentDataFragment: PaymentData
     lateinit var btnToShop : Button
+    lateinit var btnShopHistory : Button
     lateinit var tvTotalAmount : TextView
 
 
@@ -65,11 +68,21 @@ class Cart : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
         btnToShop = view.findViewById(R.id.btnToShop)
+        btnShopHistory = view.findViewById(R.id.btnShopHistory)
         tvTotalAmount = view.findViewById(R.id.tvTotalAmount)
 
         btnToShop.setOnClickListener {
             val intent = Intent(context, PaymentDataActivity::class.java)
             startActivity(intent)
+        }
+
+        btnShopHistory.setOnClickListener {
+            //val intent = Intent(context, ShopHistoryActivity::class.java)
+            //startActivity(intent)
+            val shopFragment = ShopHistory()
+            val transaction : FragmentTransaction = requireFragmentManager().beginTransaction()
+            transaction.replace(R.id.fragment_container, shopFragment)
+            transaction.commit()
         }
 
         arguments?.let {
@@ -148,7 +161,6 @@ class Cart : Fragment() {
                 Log.d(ContentValues.TAG, "Successful GET of products on names")
             }
     }
-
 
 
     companion object {

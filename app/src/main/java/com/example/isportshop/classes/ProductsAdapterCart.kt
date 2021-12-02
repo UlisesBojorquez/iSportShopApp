@@ -27,7 +27,6 @@ class ProductsAdapterCart(private val products : ArrayList<ProductCart>) : Recyc
         }
         return holder
     }
-
     override fun onBindViewHolder(holder: ProductsAdapterCart.ViewHolder, position: Int) {
         val product = products[position]
         holder.productName.text = product.name
