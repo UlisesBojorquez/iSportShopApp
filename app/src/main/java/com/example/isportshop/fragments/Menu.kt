@@ -214,7 +214,7 @@ class Menu : Fragment() {
         super.onResume()
     }
 
-    private fun chargeItems(){
+    public fun chargeItems(){
         gridLayoutManager = GridLayoutManager(context, 2)
         recyclerView.layoutManager = gridLayoutManager
         var listProduct = arrayListOf<Product>()

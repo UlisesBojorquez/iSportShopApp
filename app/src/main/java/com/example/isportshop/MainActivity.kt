@@ -87,24 +87,19 @@ class MainActivity : AppCompatActivity() {
                                         RegisterUser(facebookEmail.toString(), facebookName.toString(), facebookLastname.toString())
                                     }
                                     moveActivity(facebookEmail.toString())
-                                    //Toast.makeText(this,"Login successfully",Toast.LENGTH_SHORT).show()*/
+                                    LoginMessage(true)
                                 }else{
-                                    //Toast.makeText(this,"Email or password incorrect",Toast.LENGTH_SHORT).show()
+                                    LoginMessage(false)
                                 }
                             }
                         }
                     }
-
                     override fun onCancel() {
-
                     }
-
                     override fun onError(error: FacebookException?) {
-
                     }
                 })
         }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -133,15 +128,23 @@ class MainActivity : AppCompatActivity() {
                                 RegisterUser(googleEmail.toString(), googleName.toString(), googleLastname.toString())
                             }
                             moveActivity(googleEmail.toString())
-                            Toast.makeText(this,"Login successfully",Toast.LENGTH_SHORT).show()
+                            LoginMessage(true)
                         }else{
-                            Toast.makeText(this,"Email or password incorrect",Toast.LENGTH_SHORT).show()
+                            LoginMessage(false)
                         }
                     }
                 }
             }catch (e:ApiException){
                 Log.e("GOOGLE", e.message.toString())
             }
+        }
+    }
+
+    private fun LoginMessage(success:Boolean){
+        if(success){
+            Toast.makeText(this,"Login successfully",Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(this,"Email or password incorrect",Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -182,9 +185,10 @@ class MainActivity : AppCompatActivity() {
                         val intent=Intent(this,MenuActivity::class.java)
                         intent.putExtra("userInfo",email.text.toString())
                         startActivity(intent)
+                        LoginMessage(true)
                     }else{
                         Log.e("FIREBASE","Login went wrong: ${it.exception?.message}.")
-                        Toast.makeText(this,"Email or password incorrect",Toast.LENGTH_SHORT).show()
+                        LoginMessage(false)
                     }
                 }
         }else{
