@@ -4,5 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="default_web_client_id2" translatable="false">415348053685-j8v5nokcmlvun4hs26oktr2a6jmojppk.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">930755260911318</string>
+    <string name="fb_login_protocol_scheme">fb930755260911318</string>
 
 </resources>

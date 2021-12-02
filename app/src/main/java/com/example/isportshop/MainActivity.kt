@@ -12,11 +12,17 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -31,6 +37,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var email : EditText
     lateinit var password : EditText
     lateinit var btnGoogle : ImageButton
+    lateinit var btnFacebook : ImageButton
+    private val callbackManager = CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         email = findViewById(R.id.txtEmail)
         password = findViewById(R.id.txtPassword)
         btnGoogle = findViewById(R.id.btnGoogle)
+        btnFacebook = findViewById(R.id.btnFacebook)
 
         // Google singIn button, click to begin
         btnGoogle.setOnClickListener {
@@ -55,9 +64,53 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(googleClient.signInIntent, RC_SIGN_IN)
         }
 
+        // Facebook signIn button, click to begin
+        btnFacebook.setOnClickListener {
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("email"))
+            LoginManager.getInstance().registerCallback(callbackManager,
+                object : FacebookCallback<LoginResult>{
+                    override fun onSuccess(result: LoginResult?) {
+                        result?.let {
+                            val token = it.accessToken
+                            val credential = FacebookAuthProvider.getCredential(token.token)
+                            FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
+                                if(it.isSuccessful){
+                                    var facebookEmail = it.result.user?.email
+                                    var facebookCompleteName = it.result.user?.displayName?.split(" ")
+                                    if(facebookCompleteName?.size == 1){
+                                        var facebookName = facebookCompleteName?.get(0)
+                                        var facebookLastname = ""
+                                        RegisterUser(facebookEmail.toString(), facebookName, facebookLastname)
+                                    }else{
+                                        var facebookName = facebookCompleteName?.get(0)
+                                        var facebookLastname = facebookCompleteName?.get(1)
+                                        RegisterUser(facebookEmail.toString(), facebookName.toString(), facebookLastname.toString())
+                                    }
+                                    moveActivity(facebookEmail.toString())
+                                    //Toast.makeText(this,"Login successfully",Toast.LENGTH_SHORT).show()*/
+                                }else{
+                                    //Toast.makeText(this,"Email or password incorrect",Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+                    }
+
+                    override fun onCancel() {
+
+                    }
+
+                    override fun onError(error: FacebookException?) {
+
+                    }
+                })
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        callbackManager.onActivityResult(requestCode,resultCode, data)
+
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == RC_SIGN_IN){
@@ -79,9 +132,7 @@ class MainActivity : AppCompatActivity() {
                                 var googleLastname = googleCompleteName?.get(1)
                                 RegisterUser(googleEmail.toString(), googleName.toString(), googleLastname.toString())
                             }
-                            val intent=Intent(this,MenuActivity::class.java)
-                            intent.putExtra("userInfo",googleEmail)
-                            startActivity(intent)
+                            moveActivity(googleEmail.toString())
                             Toast.makeText(this,"Login successfully",Toast.LENGTH_SHORT).show()
                         }else{
                             Toast.makeText(this,"Email or password incorrect",Toast.LENGTH_SHORT).show()
@@ -92,6 +143,12 @@ class MainActivity : AppCompatActivity() {
                 Log.e("GOOGLE", e.message.toString())
             }
         }
+    }
+
+    private fun moveActivity(email : String){
+        val intent=Intent(this,MenuActivity::class.java)
+        intent.putExtra("userInfo",email)
+        startActivity(intent)
     }
 
     public override fun onStart() {

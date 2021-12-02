@@ -29,9 +29,9 @@ class Profile : Fragment() {
     lateinit var balance : TextView
     lateinit var maps : Button
 
-    lateinit var btnAdd : ImageButton
-    lateinit var btnSave : ImageButton
-    lateinit var btnDelete : ImageButton
+    lateinit var btnAdd : Button
+    lateinit var btnSave : Button
+    lateinit var btnDelete : Button
     lateinit var altitude : TextView
     lateinit var longitude : TextView
     lateinit var country :TextView
