@@ -94,6 +94,7 @@ class Cart : Fragment() {
                 Log.d("fragment",it.getString("userCart").toString())
                 //Obtain info from the database
                 var doc=it.getString("userCart").toString()
+                //Log.d("Veeeeeeeeeeeeeeeeer  111", doc)
                 userEmail = it.getString("userCart").toString()
                 val db = Firebase.firestore
                 db.collection("users").document(doc)
@@ -142,7 +143,6 @@ class Cart : Fragment() {
                     ) {
                         var nameDocument = document["name"].toString()
                         for (item in this.itemsList) {
-                            Log.d("entroooooooooo", "-")
                             if (nameDocument.equals(item.key)) {  //Si no funciona, cambiar aqui/
                                 listProduct.add(
                                     ProductCart(
