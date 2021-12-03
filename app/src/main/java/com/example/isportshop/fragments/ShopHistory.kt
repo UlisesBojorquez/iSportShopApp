@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.isportshop.R
+import com.example.isportshop.classes.ProductCart
 
 import com.example.isportshop.classes.Shop
 import com.example.isportshop.classes.ShopHistoryAdapter
@@ -92,10 +93,6 @@ class ShopHistory : Fragment() {
                                 )
                             )
                         }
-
-                        Log.d("Miraaaaaaaaaaaa 1.1", "${listShops.toString()}")
-
-
                         recyclerView.adapter = ShopHistoryAdapter(listShops)
                         Log.d(ContentValues.TAG, "Successful GET of products on names")
 
@@ -103,13 +100,6 @@ class ShopHistory : Fragment() {
                     }
             }
         }
-
-
-
-    }
-
-    fun getShopItems(view: View, savedInstanceState: Bundle?){
-
     }
 
 
@@ -125,6 +115,4 @@ class ShopHistory : Fragment() {
                 }
             }
     }
-
-
 }

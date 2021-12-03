@@ -10,15 +10,15 @@
 
     <TextView
         android:id="@+id/tvProductShopTitle"
-        android:layout_width="230dp"
-        android:layout_height="64dp"
+        android:layout_width="215dp"
+        android:layout_height="67dp"
         android:layout_marginEnd="6dp"
         android:layout_marginBottom="31dp"
         android:paddingTop="12dp"
         android:text="Pusrchased on: "
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/tvProductShopPrice"
         app:layout_constraintEnd_toStartOf="@+id/tvProductShopDate"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,15 +33,15 @@
         android:text="Date"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/tvProductShopPrice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvProductShopPrice"
-        android:layout_width="382dp"
-        android:layout_height="wrap_content"
+        android:layout_width="367dp"
+        android:layout_height="58dp"
         android:paddingTop="12dp"
         android:text="Product price"
         android:textAlignment="textStart"
@@ -49,10 +49,18 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintVertical_bias="0.141" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_shop_history_items"
+        android:layout_width="400dp"
+        android:layout_height="532dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductShopPrice" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

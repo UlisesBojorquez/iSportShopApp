@@ -1,6 +1,7 @@
 package com.example.isportshop.classes
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,15 +18,16 @@ class ShopHistoryAdapter(private val products : ArrayList<Shop>) : RecyclerView.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.shop_card, parent,false)
         val holder = ViewHolder(view)
-        /*
+
         view.setOnClickListener{
             val intent = Intent(parent.context, ProductShopHistoryActivity::class.java)
+            //Log.e("FIRESTORE", "error: $e")
             intent.putExtra("date",products[holder.adapterPosition].date)
             //intent.putExtra("image",products[holder.adapterPosition].image)
-            intent.putExtra("totalAmount",products[holder.adapterPosition].totalAmount)
+            intent.putExtra("totalAmount",products[holder.adapterPosition].totalAmount.toString())
             parent.context.startActivity(intent)
         }
-         */
+
         return holder
     }
 
