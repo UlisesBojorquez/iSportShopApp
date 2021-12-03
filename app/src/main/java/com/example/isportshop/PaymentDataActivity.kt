@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -59,13 +58,19 @@ class PaymentDataActivity : AppCompatActivity() {
             var idshopHistory = currentDate + "_" + totalAmountSpent
             Log.d("iiiiiiiiiiiiiiiiiid", idshopHistory)
             //items
-            val allItems = intent.getStringExtra("allItems")
+            var allItems = intent.getStringExtra("allItems")
+            if (allItems != null) {
+                allItems = allItems.substring(1, allItems.length-1)
+            }
+            var allItemsList = allItems?.split(", ")
+
 
             Log.d("eeeeeeeeeeeeee", allItems.toString())
+            Log.d("eeeeeeeeeeeeee  list", allItemsList.toString())
 
 
             //add to bd shopHistory
-            addShopHistoryToBD()
+            addShopHistoryToBD(idshopHistory, allItemsList as ArrayList<String>?)
 
             //--------------Vaciar carrito
 
@@ -115,13 +120,7 @@ class PaymentDataActivity : AppCompatActivity() {
         }
     }
 
-    public fun addShopHistoryToBD(view : View?){
-        AlertDialog.Builder(this)
-            .setMessage("Added to your cart")
-            .setPositiveButton("OK") { p0, p1 ->
-            }
-            .create()
-            .show()
+    public fun addShopHistoryToBD(idshopHistory: String, allItems: ArrayList<String>?){
 
         val user = Firebase.auth.currentUser
         user?.let {
@@ -134,22 +133,19 @@ class PaymentDataActivity : AppCompatActivity() {
 
                 val email = provider.email
 
-                var listProduct = mutableMapOf<String, Number>()
+                var listProduct = mutableMapOf<String, ArrayList<String>>()
 
                 Firebase.firestore.collection("users").get()
                     .addOnSuccessListener { documents ->
                         for (document in documents) {
                             if(document["email"].toString().equals(email)) {
-                                listProduct = document["cartItems"] as MutableMap<String, Number>
-                                if(listProduct.containsKey(productName)){
-                                    var productAmount : Number = listProduct.getValue(productName)
-                                    var productAmountInt : Int = productAmount.toInt()
-                                    productAmountInt++
-                                    productAmount = productAmountInt
-                                    listProduct.put(productName, productAmount)
+                                listProduct = document["shopHistory"] as MutableMap<String,  ArrayList<String>>
+                                if(listProduct.containsKey(idshopHistory)){
+
                                 }else{
-                                    var productAmount : Number = 1
-                                    listProduct.put(productName, productAmount)
+                                    if (allItems != null) {
+                                        listProduct.put(idshopHistory, allItems)
+                                    }
                                 }
                             }
                         }
@@ -158,25 +154,11 @@ class PaymentDataActivity : AppCompatActivity() {
 
                         // Set the "isCapital" field of the city 'DC'
                         cartItemsRef
-                            .update("cartItems", listProduct)
-                            .addOnSuccessListener { Log.d("Res", "DocumentSnapshot successfully updated!") }
-                            .addOnFailureListener { e -> Log.w("Res", "Error updating document", e) }
+                            .update("shopHistory", listProduct)
+                            .addOnSuccessListener { Log.d("Res", "DocumentSnapshot successfully updated shopHistory!") }
+                            .addOnFailureListener { e -> Log.w("Res", "Error updating document shopHistory", e) }
                     }
             }
-        }
-
-        if((stock.text.toString().split(" ")[1].toInt()-1) > 0){
-            stock.setText("Stock: " + (stock.text.toString().split(" ")[1].toInt()-1).toString())
-
-            val db = Firebase.firestore
-            db.collection("items").document(intent.getStringExtra("id").toString())
-                .update("stock", stock.text.toString().split(" ")[1].toInt())
-                .addOnSuccessListener { document ->
-                    Log.d("STOCK", "Update went well")
-                }
-                .addOnFailureListener { e ->
-                    Log.wtf("STOCK", "Error on read the document", e)
-                }
         }
     }
 }
