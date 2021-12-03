@@ -33,7 +33,9 @@ private const val ARG_PARAM2 = "param2"
  */
 class Cart : Fragment() {
     var itemsList = mutableMapOf<String, Number>()
+    var allItems = arrayListOf<String>()
     private var userEmail: String? = null
+    var total = 0.0
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -72,6 +74,8 @@ class Cart : Fragment() {
 
         btnToShop.setOnClickListener {
             val intent = Intent(context, PaymentDataActivity::class.java)
+            intent.putExtra("totalAmount",total.toString())
+            intent.putExtra("allItems",allItems.toString())
             startActivity(intent)
         }
 
@@ -120,9 +124,10 @@ class Cart : Fragment() {
         recyclerView.layoutManager = gridLayoutManager
         var listProduct = arrayListOf<ProductCart>()
         val db = Firebase.firestore
-        var total = 0.0;
+
 
         //Obtener items de la bd
+
 
         Firebase.firestore.collection("items")
             .addSnapshotListener{ documents, e ->
@@ -153,6 +158,7 @@ class Cart : Fragment() {
                                         document["stock"].toString().toInt()
                                     )
                                 )
+                                allItems.add(document["name"].toString())
                                 total += document["price"].toString().toDouble()
                             }
                         }
