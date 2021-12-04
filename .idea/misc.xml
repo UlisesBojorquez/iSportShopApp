@@ -3,6 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/activity_main.xml" value="0.32314814814814813" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/activity_menu.xml" value="0.3802083333333333" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/activity_payment_data.xml" value="0.3802083333333333" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/activity_product.xml" value="0.48802083333333335" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/activity_product_card_cart.xml" value="0.48802083333333335" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/activity_product_cart.xml" value="0.4" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/activity_product_shop_history.xml" value="0.264" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/activity_register.xml" value="0.3802083333333333" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/activity_shop_history.xml" value="0.48802083333333335" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/activity_successful_payment.xml" value="0.48802083333333335" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/fragment_cart.xml" value="0.264" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/fragment_menu.xml" value="0.35885416666666664" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/fragment_payment_data.xml" value="0.536" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/fragment_shop_history.xml" value="0.264" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/product_card.xml" value="0.536" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/product_card_cart.xml" value="0.2548076923076923" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/layout/shop_card.xml" value="0.4" />
+        <entry key="..\:/Downloads/iSportShopApp/app/src/main/res/menu/menu.xml" value="0.48802083333333335" />
         <entry key="..\:/ISC/7mo semestre/AplicacionesMoviles/Proyecto/iSportShop/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.5130208333333334" />
         <entry key="..\:/ISC/7mo semestre/AplicacionesMoviles/Proyecto/iSportShop/app/src/main/res/drawable/ic_delete.xml" value="0.5007625826131165" />
         <entry key="..\:/ISC/7mo semestre/AplicacionesMoviles/Proyecto/iSportShop/app/src/main/res/drawable/ic_home.xml" value="0.5130208333333334" />
@@ -38,6 +56,14 @@
         <entry key="..\:/Users/HP/AndroidStudioProjects/iSportShop/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/iSportShop/app/src/main/res/layout/product_card.xml" value="0.19021739130434784" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/iSportShop/app/src/main/res/menu/menu.xml" value="0.25" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/iSportShopApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/iSportShopApp/app/src/main/res/layout/activity_maps.xml" value="0.1897644927536232" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/iSportShopApp/app/src/main/res/layout/activity_payment_data.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/iSportShopApp/app/src/main/res/layout/activity_product.xml" value="0.3645833333333333" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/iSportShopApp/app/src/main/res/layout/activity_product_cart.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/iSportShopApp/app/src/main/res/layout/fragment_cart.xml" value="0.5203804347826086" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/iSportShopApp/app/src/main/res/layout/fragment_profile.xml" value="0.5258152173913043" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/iSportShopApp/app/src/main/res/layout/product_card.xml" value="0.3645833333333333" />
         <entry key="app/src/main/res/layout/activity_menu.xml" value="0.19519927536231885" />
         <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.19519927536231885" />

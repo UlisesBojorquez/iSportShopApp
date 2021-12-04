@@ -31,7 +31,6 @@ class ProductActivity : AppCompatActivity() {
     var productName = ""
     var itemsList = arrayListOf<String>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,21 +42,26 @@ class ProductActivity : AppCompatActivity() {
         price=findViewById(R.id.product_price_detail)
         stock=findViewById(R.id.product_stock_detail)
 
-
-        nameP.setText(intent.getStringExtra("name"))
-        Picasso.get().load(intent.getStringExtra("image")).into(image)
-        description.setText(intent.getStringExtra("description"))
-        price.setText("Price: $" + intent.getStringExtra("price"))
-        stock.setText("Stock: " + intent.getStringExtra("stock"))
-
-        productName = intent.getStringExtra("name").toString()
-
+        val db = Firebase.firestore
+        db.collection("items").document(intent.getStringExtra("id").toString())
+            .get()
+            .addOnSuccessListener { document ->
+                var data = document?.data
+                nameP.setText(document["name"].toString())
+                Picasso.get().load(document["image"].toString()).into(image)
+                description.setText(document["description"].toString())
+                price.setText("Price: $" + document["price"].toString())
+                stock.setText("Stock: " + document["stock"].toString())
+                productName = document["name"].toString()
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIREBASE", "Error on read the document", e)
+            }
     }
-
 
     public fun addToCart(v: View?){
         AlertDialog.Builder(this)
-            .setMessage("Added to your wish list")
+            .setMessage("Added to your cart")
             .setPositiveButton("OK") { p0, p1 ->
             }
             .create()
@@ -103,6 +107,20 @@ class ProductActivity : AppCompatActivity() {
                             .addOnFailureListener { e -> Log.w("Res", "Error updating document", e) }
                     }
             }
+        }
+
+        if((stock.text.toString().split(" ")[1].toInt()-1) > 0){
+            stock.setText("Stock: " + (stock.text.toString().split(" ")[1].toInt()-1).toString())
+
+            val db = Firebase.firestore
+            db.collection("items").document(intent.getStringExtra("id").toString())
+                .update("stock", stock.text.toString().split(" ")[1].toInt())
+                .addOnSuccessListener { document ->
+                    Log.d("STOCK", "Update went well")
+                }
+                .addOnFailureListener { e ->
+                    Log.wtf("STOCK", "Error on read the document", e)
+                }
         }
     }
 }

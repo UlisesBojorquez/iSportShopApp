@@ -52,7 +52,6 @@ class RegisterActivity : AppCompatActivity() {
         if(TextUtils.isEmpty(lastName.text.toString())){
             flag = false
         }
-
         return flag
     }
 
@@ -64,6 +63,18 @@ class RegisterActivity : AppCompatActivity() {
                 confirmPassword.setText("");
             }else{
                 var cartItemsMap = mutableMapOf<String, Number>()
+                var shopHistoryMap = mutableMapOf<String, Array<String>>()
+
+                var location = mutableMapOf<String, String>()
+                location["altitude"]= ""
+                location["longitude"]=""
+                location["country"]=""
+                location["state"]=""
+                location["city"]=""
+                location["postalcode"]=""
+                location["address1"]=""
+                location["address2"]=""
+
                 auth.createUserWithEmailAndPassword(email.text.toString(),password.text.toString())
                     .addOnCompleteListener(this) {
                         if(it.isSuccessful){
@@ -75,7 +86,9 @@ class RegisterActivity : AppCompatActivity() {
                                 "email" to email.text.toString(),
                                 "password" to password.text.toString(),
                                 "balance" to initialBalance,
-                                "cartItems" to cartItemsMap
+                                "cartItems" to cartItemsMap,
+                                "location" to location,
+                                "shopHistory" to shopHistoryMap
                             )
                             val db = Firebase.firestore
                             db.collection("users").document(email.text.toString())
@@ -99,12 +112,9 @@ class RegisterActivity : AppCompatActivity() {
             Log.w("INPUTS","Inputs missing in register.")
             Toast.makeText(this,"Fill the blank inputs",Toast.LENGTH_SHORT).show()
         }
-
     }
 
     public fun MoveLogIn(v: View?){
         finish()
     }
-
-
 }

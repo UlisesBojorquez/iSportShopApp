@@ -75,33 +75,9 @@ class Menu : Fragment() {
         progressBar=view.findViewById(R.id.progressBar)
         gridLayoutManager = GridLayoutManager(context, 2)
         recyclerView.layoutManager = gridLayoutManager
-        var listProduct = arrayListOf<Product>()
-        val db = Firebase.firestore
-        db.collection("items")
-            .get()
-            .addOnSuccessListener { documents ->
-                val list= arrayListOf<Product>()
-                //listProduct.clear()
-                for (document in documents) {
-                    list.add(
-                        Product(
-                            document["name"].toString(),
-                            document["description"].toString(),
-                            document["price"].toString().toDouble(),
-                            document["image"].toString(),
-                            document["stock"].toString().toInt()
-                        )
-                    )
-                }
+        chargeItems()
 
-                listProduct = list.clone() as ArrayList<Product>
-                recyclerView.adapter = ProductsAdapter(listProduct)
-                Log.d(ContentValues.TAG, "Successful GET of products")
-                progressBar.visibility = View.GONE
-            }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-            }
+
     }
 
     fun searchMethod(){
@@ -119,6 +95,7 @@ class Menu : Fragment() {
                     for (document in documents) {
                         list.add(
                             Product(
+                                document.id,
                                 document["name"].toString(),
                                 document["description"].toString(),
                                 document["price"].toString().toDouble(),
@@ -145,6 +122,7 @@ class Menu : Fragment() {
                         if(document["name"].toString().lowercase().equals(term)) {
                             listProduct.add(
                                 Product(
+                                    document.id,
                                     document["name"].toString(),
                                     document["description"].toString(),
                                     document["price"].toString().toDouble(),
@@ -165,6 +143,7 @@ class Menu : Fragment() {
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         if(!listProduct.contains(Product(
+                                document.id,
                                 document["name"].toString(),
                                 document["description"].toString(),
                                 document["price"].toString().toDouble(),
@@ -177,6 +156,7 @@ class Menu : Fragment() {
                                 if (nameDocument.indexOf(word) != -1) {
                                     listProduct.add(
                                         Product(
+                                            document.id,
                                             document["name"].toString(),
                                             document["description"].toString(),
                                             document["price"].toString().toDouble(),
@@ -198,6 +178,7 @@ class Menu : Fragment() {
             Firebase.firestore.collection("items").whereArrayContainsAny("category", terms).get().addOnSuccessListener { documents ->
                 for (document in documents) {
                     if(!listProduct.contains(Product(
+                            document.id,
                             document["name"].toString(),
                             document["description"].toString(),
                             document["price"].toString().toDouble(),
@@ -207,6 +188,7 @@ class Menu : Fragment() {
                     ) {
                     listProduct.add(
                         Product(
+                            document.id,
                             document["name"].toString(),
                             document["description"].toString(),
                             document["price"].toString().toDouble(),
@@ -225,6 +207,44 @@ class Menu : Fragment() {
         }
 
 
+    }
+
+    override fun onResume() {
+        chargeItems()
+        super.onResume()
+    }
+
+    public fun chargeItems(){
+        gridLayoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = gridLayoutManager
+        var listProduct = arrayListOf<Product>()
+        val db = Firebase.firestore
+        db.collection("items")
+            .get()
+            .addOnSuccessListener { documents ->
+                val list= arrayListOf<Product>()
+                //listProduct.clear()
+                for (document in documents) {
+                    list.add(
+                        Product(
+                            document.id,
+                            document["name"].toString(),
+                            document["description"].toString(),
+                            document["price"].toString().toDouble(),
+                            document["image"].toString(),
+                            document["stock"].toString().toInt()
+                        )
+                    )
+                }
+
+                listProduct = list.clone() as ArrayList<Product>
+                recyclerView.adapter = ProductsAdapter(listProduct)
+                Log.d(ContentValues.TAG, "Successful GET of products")
+                progressBar.visibility = View.GONE
+            }
+            .addOnFailureListener { exception ->
+                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+            }
     }
 
     companion object {

@@ -35,6 +35,7 @@ class MenuActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.ic_profile -> {
                     val userData= intent.getStringExtra("userInfo")
+                    Log.wtf("USERINFO", userData)
                     var bundle=Bundle()
                     bundle.putString("userProfile",userData)
                     profileFragment.arguments = bundle
@@ -70,11 +71,7 @@ class MenuActivity : AppCompatActivity() {
     fun searchMethod(view: View?){
         menuFragment.searchMethod()
     }
-    /*
-        fun displayCartItemsMethod(view: View?){
-            cartFragment.displayCartItemsMethod()
-        }
-    */
+
     public fun LogOut(v:View?){
         auth.signOut()
         val intent=Intent(this,MainActivity::class.java)

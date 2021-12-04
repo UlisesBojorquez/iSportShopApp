@@ -6,7 +6,6 @@ data class ProductCart (
     var price: Double,
     var image: String,
     var stock: Int,
-    //var amount : Int
 ){
 
 }
