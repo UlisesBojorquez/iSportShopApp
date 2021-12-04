@@ -216,6 +216,7 @@ class MainActivity : AppCompatActivity() {
                 var data = document?.data
                 if(data == null){
                     var cartItemsMap = mutableMapOf<String, Number>()
+                    var shopHistoryMap = mutableMapOf<String, ArrayList<String>>()
                     var location = mutableMapOf<String, String>()
                     location["altitude"]= ""
                     location["longitude"]=""
@@ -226,6 +227,7 @@ class MainActivity : AppCompatActivity() {
                     location["address1"]=""
                     location["address2"]=""
 
+
                     //Add the user to the Users collection
                     val initialBalance = 5000
                     var newUser = hashMapOf(
@@ -235,7 +237,8 @@ class MainActivity : AppCompatActivity() {
                         "password" to "",
                         "balance" to initialBalance,
                         "cartItems" to cartItemsMap,
-                        "location" to location
+                        "location" to location,
+                        "shopHistory" to shopHistoryMap
                     )
                     db.collection("users").document(email)
                         .set(newUser)
