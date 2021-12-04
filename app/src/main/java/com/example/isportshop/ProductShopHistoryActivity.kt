@@ -111,20 +111,32 @@ class ProductShopHistoryActivity : AppCompatActivity() {
 
 
                         for (item in itemsList) {
-                            if (nameDocument.equals(item)) {  //Si no funciona, cambiar aqui/
-                                listShopItems.add(
-                                    ProductCart(
-                                        document["name"].toString(),
-                                        document["description"].toString(),
-                                        document["price"].toString().toDouble(),
-                                        document["image"].toString(),
-                                        document["stock"].toString().toInt()
+                            if(!listShopItems.contains(ProductCart(
+                                    document["name"].toString(),
+                                    document["description"].toString(),
+                                    document["price"].toString().toDouble(),
+                                    document["image"].toString(),
+                                    document["stock"].toString().toInt()
+                                ) )
+                            ){
+                                if (nameDocument.equals(item)) {  //Si no funciona, cambiar aqui/
+                                    listShopItems.add(
+                                        ProductCart(
+                                            document["name"].toString(),
+                                            document["description"].toString(),
+                                            document["price"].toString().toDouble(),
+                                            document["image"].toString(),
+                                            document["stock"].toString().toInt()
+                                        )
                                     )
-                                )
+                                }
+
                             }
+
                         }
                     }
                 }
+                Log.d("Miraaaaaaaaaaaaa", listShopItems.toString())
                 recyclerView.adapter = ProductsAdapterCart(listShopItems)
                 Log.d(ContentValues.TAG, "Successful GET of products on names final")
             }
