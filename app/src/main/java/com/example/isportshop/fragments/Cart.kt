@@ -165,7 +165,7 @@ class Cart : Fragment() {
                     }
                 }
                 tvTotalAmount.setText(total.toString())
-               
+
                 recyclerView.adapter = ProductsAdapterCart(listProduct)
                 Log.d(ContentValues.TAG, "Successful GET of products on names")
             }
