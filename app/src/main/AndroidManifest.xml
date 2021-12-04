@@ -18,6 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ISportShop">
         <activity
+            android:name=".ProductShopHistoryActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ShopHistoryActivity"
+            android:exported="true" />
+        <activity
             android:name=".SuccessfulPaymentActivity"
             android:exported="true" />
         <!--

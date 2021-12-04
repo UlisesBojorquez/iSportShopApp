@@ -11,7 +11,7 @@ import com.example.isportshop.ProductCartActivity
 import com.example.isportshop.R
 import com.squareup.picasso.Picasso
 
-class ProductsAdapterCart(private val products : ArrayList<ProductCart>) : RecyclerView.Adapter<ProductsAdapterCart.ViewHolder>() {
+class ShopItemsAdapter(private val products : ArrayList<ProductCart>) : RecyclerView.Adapter<ShopItemsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_card_cart, parent,false)
@@ -27,7 +27,7 @@ class ProductsAdapterCart(private val products : ArrayList<ProductCart>) : Recyc
         }
         return holder
     }
-    override fun onBindViewHolder(holder: ProductsAdapterCart.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ShopItemsAdapter.ViewHolder, position: Int) {
         val product = products[position]
         holder.productName.text = product.name
         Picasso.get().load(product.image).into(holder.productImage)

@@ -63,6 +63,8 @@ class RegisterActivity : AppCompatActivity() {
                 confirmPassword.setText("");
             }else{
                 var cartItemsMap = mutableMapOf<String, Number>()
+                var shopHistoryMap = mutableMapOf<String, Array<String>>()
+
                 var location = mutableMapOf<String, String>()
                 location["altitude"]= ""
                 location["longitude"]=""
@@ -85,7 +87,8 @@ class RegisterActivity : AppCompatActivity() {
                                 "password" to password.text.toString(),
                                 "balance" to initialBalance,
                                 "cartItems" to cartItemsMap,
-                                "location" to location
+                                "location" to location,
+                                "shopHistory" to shopHistoryMap
                             )
                             val db = Firebase.firestore
                             db.collection("users").document(email.text.toString())

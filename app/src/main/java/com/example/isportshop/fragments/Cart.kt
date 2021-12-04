@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.isportshop.PaymentDataActivity
@@ -33,11 +33,15 @@ private const val ARG_PARAM2 = "param2"
  */
 class Cart : Fragment() {
     var itemsList = mutableMapOf<String, Number>()
+    var allItems = arrayListOf<String>()
+    private var userEmail: String? = null
+    var total = 0.0
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     //lateinit var paymentDataFragment: PaymentData
     lateinit var btnToShop : Button
+    lateinit var btnShopHistory : Button
     lateinit var tvTotalAmount : TextView
 
 
@@ -65,11 +69,27 @@ class Cart : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
         btnToShop = view.findViewById(R.id.btnToShop)
+        btnShopHistory = view.findViewById(R.id.btnShopHistory)
         tvTotalAmount = view.findViewById(R.id.tvTotalAmount)
 
         btnToShop.setOnClickListener {
             val intent = Intent(context, PaymentDataActivity::class.java)
+            intent.putExtra("totalAmount",total.toString())
+            intent.putExtra("allItems",allItems.toString())
             startActivity(intent)
+        }
+
+        btnShopHistory.setOnClickListener {
+            //val intent = Intent(context, ShopHistoryActivity::class.java)
+            //startActivity(intent)
+            val shopFragment = ShopHistory()
+            val transaction : FragmentTransaction = requireFragmentManager().beginTransaction()
+            transaction.replace(R.id.fragment_container, shopFragment)
+            transaction.commit()
+
+            var bundle=Bundle()
+            bundle.putString("userCart",userEmail)
+            shopFragment.arguments = bundle
         }
 
         arguments?.let {
@@ -78,6 +98,8 @@ class Cart : Fragment() {
                 Log.d("fragment",it.getString("userCart").toString())
                 //Obtain info from the database
                 var doc=it.getString("userCart").toString()
+                //Log.d("Veeeeeeeeeeeeeeeeer  111", doc)
+                userEmail = it.getString("userCart").toString()
                 val db = Firebase.firestore
                 db.collection("users").document(doc)
                     .addSnapshotListener{ document, e ->
@@ -92,8 +114,6 @@ class Cart : Fragment() {
                         Log.d("PROFILE", "${data.toString()}")
 
                         this.itemsList = document?.get("cartItems") as MutableMap<String, Number>
-
-                        //name.text = document["name"].toString()
                     }
             }
         }
@@ -104,9 +124,10 @@ class Cart : Fragment() {
         recyclerView.layoutManager = gridLayoutManager
         var listProduct = arrayListOf<ProductCart>()
         val db = Firebase.firestore
-        var total = 0.0;
+
 
         //Obtener items de la bd
+
 
         Firebase.firestore.collection("items")
             .addSnapshotListener{ documents, e ->
@@ -127,7 +148,6 @@ class Cart : Fragment() {
                     ) {
                         var nameDocument = document["name"].toString()
                         for (item in this.itemsList) {
-                            //Log.d("entroooooooooo", item)
                             if (nameDocument.equals(item.key)) {  //Si no funciona, cambiar aqui/
                                 listProduct.add(
                                     ProductCart(
@@ -138,6 +158,7 @@ class Cart : Fragment() {
                                         document["stock"].toString().toInt()
                                     )
                                 )
+                                allItems.add(document["name"].toString())
                                 total += document["price"].toString().toDouble()
                             }
                         }
@@ -148,7 +169,6 @@ class Cart : Fragment() {
                 Log.d(ContentValues.TAG, "Successful GET of products on names")
             }
     }
-
 
 
     companion object {

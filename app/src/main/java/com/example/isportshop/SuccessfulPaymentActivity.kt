@@ -17,7 +17,6 @@ class SuccessfulPaymentActivity : AppCompatActivity() {
     }
 
     public fun toContinueShopping(view : View?){
-        //--------------Vaciar carrito
         val user = Firebase.auth.currentUser
         user?.let {
             for(provider in it.providerData){
