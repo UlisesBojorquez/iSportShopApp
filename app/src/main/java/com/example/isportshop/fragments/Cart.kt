@@ -68,6 +68,7 @@ class Cart : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
+        total = 0.0
         btnToShop = view.findViewById(R.id.btnToShop)
         btnShopHistory = view.findViewById(R.id.btnShopHistory)
         tvTotalAmount = view.findViewById(R.id.tvTotalAmount)
@@ -164,6 +165,7 @@ class Cart : Fragment() {
                     }
                 }
                 tvTotalAmount.setText(total.toString())
+               
                 recyclerView.adapter = ProductsAdapterCart(listProduct)
                 Log.d(ContentValues.TAG, "Successful GET of products on names")
             }
